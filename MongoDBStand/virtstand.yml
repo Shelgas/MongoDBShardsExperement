@@ -1,0 +1,15 @@
+version: "0.1"
+vms: []
+stages:
+  - name: beginning
+    actions:
+      - command: start
+        description: Starting VMs
+  - name: main
+    actions:
+      - command: provision
+        description: Run provisioning scripts on all VMs
+  - name: ending
+    actions:
+      - command: stop
+        description: Stopping VMs
