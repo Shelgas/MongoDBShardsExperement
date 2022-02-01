@@ -1,0 +1,49 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    NODEJS_VERSION: "14"
+    ansible_distribution_release: "focal"
+  tasks:
+    - name: Install the gpg key for nodejs LTS
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+    - name: Install the nodejs LTS repos
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+        state: present
+        update_cache: yes
+    - name: Install the nodejs
+      apt:
+        name: nodejs
+        state: latest
+    - name: Install the latest NPM
+      npm:
+        name: npm
+        global: yes
+        state: latest
+    - name: Create directory for script
+      file:
+        path: /home/vagrant/script
+        owner: root
+        group: root
+        state: directory
+        mode: '0755'
+    - name: s
+      copy:
+        src: ./config-templates/exp.js
+        dest: /home/vagrant/script/experement.js
+        owner: root
+        group: root
+        mode: '0644'
+    - name: d
+      copy:
+        src: ./config-templates/package.json
+        dest: /home/vagrant/script/package.json
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Install app dependencies defined in package.json.
+      npm: path=/home/vagrant/script
+  

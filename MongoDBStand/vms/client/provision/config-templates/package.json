@@ -1,0 +1,11 @@
+{
+  "name": "sharding_experiment",
+  "version": "0.1.0",
+  "main": "experiment.js",
+  "dependencies": {
+    "lodash": "~4.17.4",
+    "mongodb": "~2.2.22",
+    "randomstring": "~1.1.5",
+    "readline-sync": "~1.4.6"
+  }
+}

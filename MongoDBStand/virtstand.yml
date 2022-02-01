@@ -1,15 +1,2392 @@
 version: "0.1"
-vms: []
+vms:
+  - name: configServer
+    path: vms/configServer
+  - name: mongos
+    path: vms/mongos
+  - name: shard1
+    path: vms/shard1
+  - name: client
+    path: vms/client
+  - name: shard2
+    path: vms/shard2
+  - name: shard3
+    path: vms/shard3
+  - name: shard4
+    path: vms/shard4
+  - name: shard5
+    path: vms/shard5
 stages:
-  - name: beginning
+
+# # Experiment 1
+
+#   - name: FirstExperementPreparation
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+      
+      
+#   - name: FirstExperementExec
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000000 1000
+#         description: 'add quantity 1000000 items and 1000 item size'
+    
+
+
+#   - name: FirstExperementEnding
+#     actions:
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp1_1
+#         description: 'Copy etc listing to host'
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#         options:
+#           start: FirstExperementExec
+#           end: FirstExperementExec
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+  
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+
+# # Experiment 1.2
+#   - name: FirstExperementPreparation2
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+            
+#   - name: FirstExperementExec2
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 100000 10000
+#         description: 'add quantity 100000 items and 10000 item size'
+
+
+#   - name: FirstExperementEnding2
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#         options:
+#           start: FirstExperementExec2
+#           end: FirstExperementExec2
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp1_2
+#         description: 'Copy etc listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 1.3
+            
+#   - name: FirstExperementPreparation3
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: FirstExperementExec3
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 10000 100000
+#         description: 'add quantity 10000 items and 100000 item size'
+
+
+#   - name: FirstExperementEnding3
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#         options:
+#           start: FirstExperementExec3
+#           end: FirstExperementExec3
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp1_3
+#         description: 'Copy etc listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 1.4
+#   - name: FirstExperementPreparation4
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+            
+#   - name: FirstExperementExec4
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000 1000000
+#         description: 'add quantity 1000 items and 1000000 item size'
+  
+
+#   - name: FirstExperementEnding4
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#         options:
+#           start: FirstExperementExec4
+#           end: FirstExperementExec4
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+      
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp1_4
+#         description: 'Copy etc listing to host'
+      
+
+
+# # Experiment 1.5
+          
+#   - name: FirstExperementPreparation5
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: FirstExperementExec5
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 200 5000000
+#         description: 'add quantity 200 items and 5000000 item size'
+
+
+#   - name: FirstExperementEnding5
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#         options:
+#           start: FirstExperementExec5
+#           end: FirstExperementExec5
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp1_5
+#         description: 'Copy etc listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 2
+
+#   - name: SecondExperementPreparation
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"
+#         description: 'adding new shard'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: SecondExperementExec
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000000 1000
+#         description: 'add quantity 1000000 items and 1000 item size'
+  
+
+#   - name: SecondExperementEnding
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#         options:
+#           start: SecondExperementExec
+#           end: SecondExperementExec
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp2_1
+#         description: 'Copy etc listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 2.2
+
+#   - name: SecondExperementPreparation2
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"
+#         description: 'adding new shard'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: SecondExperementExec2
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 100000 10000
+#         description: 'add quantity 100000 items and 10000 item size'
+  
+
+#   - name: SecondExperementEnding2
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#         options:
+#           start: SecondExperementExec2
+#           end: SecondExperementExec2
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp2_2
+#         description: 'Copy etc listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 2.3
+
+#   - name: SecondExperementPreparation3
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"
+#         description: 'adding new shard'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: SecondExperementExec3
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 10000 100000
+#         description: 'add quantity 10000 items and 100000 item size'
+  
+
+#   - name: SecondExperementEnding3
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#         options:
+#           start: SecondExperementExec3
+#           end: SecondExperementExec3
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp2_3
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 2.4
+
+#   - name: SecondExperementPreparation4
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"
+#         description: 'adding new shard'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: SecondExperementExec4
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000 1000000
+#         description: 'add quantity 1000 items and 1000000 item size'
+
+
+#   - name: SecondExperementEnding4
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#         options:
+#           start: SecondExperementExec4
+#           end: SecondExperementExec4
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp2_4
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 2.5
+
+#   - name: SecondExperementPreparation5
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"
+#         description: 'adding new shard'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: SecondExperementExec5
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 200 5000000
+#         description: 'add quantity 200 items and 5000000 item size'
+  
+
+#   - name: SecondExperementEnding5
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#         options:
+#           start: SecondExperementExec5
+#           end: SecondExperementExec5
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp2_5
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+
+# # Experiment 3
+
+#   - name: ThirdExperementPreparation
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ThirdExperementExec
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000000 1000
+#         description: 'add quantity 1000000 items and 1000 item size'
+  
+
+#   - name: ThirdExperementEnding
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#         options:
+#           start: ThirdExperementExec
+#           end: ThirdExperementExec
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp3_1
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 3.2
+
+#   - name: ThirdExperementPreparation2
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ThirdExperementExec2
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 100000 10000
+#         description: 'add quantity 100000 items and 10000 item size'
+  
+
+#   - name: ThirdExperementEnding2
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#         options:
+#           start: ThirdExperementExec2
+#           end: ThirdExperementExec2
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp3_2
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 3.3
+
+#   - name: ThirdExperementPreparation3
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: ThirdExperementExec3
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 10000 100000
+#         description: 'add quantity 10000 items and 100000 item size'
+  
+
+#   - name: ThirdExperementEnding3
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#         options:
+#           start: ThirdExperementExec3
+#           end: ThirdExperementExec3
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp3_3
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 3.4
+
+#   - name: ThirdExperementPreparation4
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ThirdExperementExec4
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000 1000000
+#         description: 'add quantity 1000 items and 1000000 item size'
+  
+
+#   - name: ThirdExperementEnding4
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#         options:
+#           start: ThirdExperementExec4
+#           end: ThirdExperementExec4
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp3_4
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 3.5
+
+#   - name: ThirdExperementPreparation5
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ThirdExperementExec5
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 200 5000000
+#         description: 'add quantity 200 items and 5000000 item size'
+  
+
+#   - name: ThirdExperementEnding5
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#         options:
+#           start: ThirdExperementExec5
+#           end: ThirdExperementExec5
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp3_5
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 4
+
+#   - name: ExperementPreparation_4
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: ExperementExec4.1
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000000 1000
+#         description: 'add quantity 1000000 items and 1000 item size'
+  
+
+#   - name: ExperementEnding4.1
+#     actions:
+#       - command: restart
+#         description: 'Restart all VMs'
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+
+#         options:
+#           start: ExperementExec4.1
+#           end: ExperementExec4.1
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp4_1
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 4.2
+
+#   - name: ExperementPreparation4.2
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+
+#   - name: ExperementExec4.2
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 100000 10000
+#         description: 'add quantity 100000 items and 10000 item size'
+  
+
+#   - name: ExperementEnding4.2
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         options:
+#           start: ExperementExec4.2
+#           end: ExperementExec4.2
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp4_2
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 4.3
+
+#   - name: ExperementPreparation4.3
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ExperementExec4.3
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 10000 100000
+#         description: 'add quantity 10000 items and 100000 item size'
+  
+
+#   - name: ExperementEnding4.3
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         options:
+#           start: ExperementExec4.3
+#           end: ExperementExec4.3
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp4_3
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 4.4
+
+#   - name: ExperementPreparation4.4
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ExperementExec4.4
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000 1000000
+#         description: 'add quantity 1000 items and 1000000 item size'
+  
+
+#   - name: ExperementEnding4.4
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         options:
+#           start: ExperementExec4.4
+#           end: ExperementExec4.4
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp4_4
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+      
+
+
+# # Experiment 4.5
+
+#   - name: ExperementPreparation4.5
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ExperementExec4.5
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 200 5000000
+#         description: 'add quantity 200 items and 5000000 item size'
+  
+
+#   - name: ExperementEnding4.5
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         options:
+#           start: ExperementExec4.5
+#           end: ExperementExec4.5
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp4_5
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 5
+
+#   - name: ExperementPreparation_5
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"; mongosh --eval "sh.addShard('shard5ReplicaSet/shard5:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+      
+
+
+#   - name: ExperementExec5.1
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 1000000 1000
+#         description: 'add quantity 1000000 items and 1000 item size'
+  
+
+#   - name: ExperementEnding5.1
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         options:
+#           start: ExperementExec5.1
+#           end: ExperementExec5.1
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp5_1
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+
+# # Experiment 5.2
+
+
+#   - name: ExperementPreparation5.2
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"; mongosh --eval "sh.addShard('shard5ReplicaSet/shard5:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ExperementExec5.2
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 100000 10000
+#         description: 'add quantity 100000 items and 10000 item size'
+  
+
+#   - name: ExperementEnding5.2
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         options:
+#           start: ExperementExec5.2
+#           end: ExperementExec5.2
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp5_2
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+
+# # Experiment 5.3
+
+#   - name: ExperementPreparation5.3
+#     actions:
+#       - command: destroy
+#         description: Destroy VMs
+#       - command: start
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Starting VMs
+#       - command: setupHosts
+#         vms:
+#           - mongos
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#           - client
+#         description: Run setupHosts scripts on VMs
+#       - command: provision
+#         vms:
+#           - configServer
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         description: Run provisioning scripts on VMs
+#       - command: provision
+#         vms:
+#           - mongos
+#         description: Run provisioning scripts on mongos
+#       - command: provision
+#         vms:
+#           - client
+#         description: Run provisioning scripts on client 
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command:  mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"; mongosh --eval "sh.addShard('shard5ReplicaSet/shard5:27017')"
+#         description: 'adding new shards'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: sudo sh restart.sh
+#         description: 'adding new shard'
+
+
+#   - name: ExperementExec5.3
+#     actions:
+#       - command: restart
+#         vms:
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#         description: 'Restart all VMs'
+#       - command: exec
+#         vms: client
+#         options:
+#           command: sudo node script/experement.js 10000 100000
+#         description: 'add quantity 10000 items and 100000 item size'
+  
+
+#   - name: ExperementEnding5.3
+#     actions:
+#       - command: report
+#         vms: 
+#           - mongos
+#           - shard1
+#           - shard2
+#           - shard3
+#           - shard4
+#           - shard5
+#         options:
+#           start: ThirdExperementExec3
+#           end: ThirdExperementExec3
+#           labels:
+#             - CPU
+#             - MEM
+#             - DSK
+#         description: 'Export of CPU and MEM reports for the first experiment'
+#       - command: copy
+#         vms: client
+#         options:
+#           direction: out
+#           from: /home/vagrant/report.txt
+#           to: ./data/exp5_3
+#         description: 'Copy report listing to host'
+#       - command: exec
+#         vms: mongos
+#         options:
+#           command: mongo --eval "db.items.remove({})"
+#         description: 'remove all items from database'
+      
+
+# Experiment 5.4
+
+  - name: ExperementPreparation5.4
     actions:
+      - command: destroy
+        description: Destroy VMs
       - command: start
+        vms:
+          - mongos
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+          - client
         description: Starting VMs
-  - name: main
-    actions:
+      - command: setupHosts
+        vms:
+          - mongos
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+          - client
+        description: Run setupHosts scripts on VMs
       - command: provision
-        description: Run provisioning scripts on all VMs
-  - name: ending
+        vms:
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+        description: Run provisioning scripts on VMs
+      - command: provision
+        vms:
+          - mongos
+        description: Run provisioning scripts on mongos
+      - command: provision
+        vms:
+          - client
+        description: Run provisioning scripts on client 
+      - command: exec
+        vms: mongos
+        options:
+          command:  mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"; mongosh --eval "sh.addShard('shard5ReplicaSet/shard5:27017')"
+        description: 'adding new shards'
+      - command: exec
+        vms: mongos
+        options:
+          command: sudo sh restart.sh
+        description: 'adding new shard'
+
+
+  - name: ExperementExec5.4
     actions:
-      - command: stop
-        description: Stopping VMs
+      - command: restart
+        vms:
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+        description: 'Restart all VMs'
+      - command: exec
+        vms: client
+        options:
+          command: sudo node script/experement.js 1000 1000000
+        description: 'add quantity 1000 items and 1000000 item size'
+  
+
+  - name: ExperementEnding5.4
+    actions:
+      - command: report
+        vms: 
+          - mongos
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+        options:
+          start: ExperementExec5.4
+          end: ExperementExec5.4
+          labels:
+            - CPU
+            - MEM
+            - DSK
+        description: 'Export of CPU and MEM reports for the first experiment'
+      - command: copy
+        vms: client
+        options:
+          direction: out
+          from: /home/vagrant/report.txt
+          to: ./data/exp5_4
+        description: 'Copy report listing to host'
+      - command: exec
+        vms: mongos
+        options:
+          command: mongo --eval "db.items.remove({})"
+        description: 'remove all items from database'
+
+
+# Experiment 5.5
+
+  - name: ExperementPreparation5.5
+    actions:
+      - command: destroy
+        description: Destroy VMs
+      - command: start
+        vms:
+          - mongos
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+          - client
+        description: Starting VMs
+      - command: setupHosts
+        vms:
+          - mongos
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+          - client
+        description: Run setupHosts scripts on VMs
+      - command: provision
+        vms:
+          - configServer
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+        description: Run provisioning scripts on VMs
+      - command: provision
+        vms:
+          - mongos
+        description: Run provisioning scripts on mongos
+      - command: provision
+        vms:
+          - client
+        description: Run provisioning scripts on client 
+      - command: exec
+        vms: mongos
+        options:
+          command:  mongosh --eval "sh.addShard('shard2ReplicaSet/shard2:27017')"; mongosh --eval "sh.addShard('shard3ReplicaSet/shard3:27017')"; mongosh --eval "sh.addShard('shard4ReplicaSet/shard4:27017')"; mongosh --eval "sh.addShard('shard5ReplicaSet/shard5:27017')"
+        description: 'adding new shards'
+      - command: exec
+        vms: mongos
+        options:
+          command: sudo sh restart.sh
+        description: 'adding new shard'
+
+
+  - name: ExperementExec5.5
+    actions:
+      - command: restart
+        vms:
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+        description: 'Restart all VMs'
+      - command: exec
+        vms: client
+        options:
+          command: sudo node script/experement.js 200 5000000
+        description: 'add quantity 200 items and 5000000 item size'
+  
+
+  - name: ExperementEnding5.5
+    actions:
+      - command: report
+        vms: 
+          - mongos
+          - shard1
+          - shard2
+          - shard3
+          - shard4
+          - shard5
+        options:
+          start: ExperementExec5.5
+          end: ExperementExec5.5
+          labels:
+            - CPU
+            - MEM
+            - DSK
+        description: 'Export of CPU and MEM reports for the first experiment'
+      - command: copy
+        vms: client
+        options:
+          direction: out
+          from: /home/vagrant/report.txt
+          to: ./data/exp5_5
+        description: 'Copy report listing to host'
+      # - command: exec
+      #   vms: mongos
+      #   options:
+      #     command: mongo --eval "db.items.remove({})"
+      #   description: 'remove all items from database'

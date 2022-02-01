@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install the MongoDB
+      apt:
+        name: mongodb-org
+        state: latest
+
+    - name: MongoDB configuration
+      template:
+        src: ./config-templates/mongos.j2
+        dest: /etc/mongos.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Create MongoDB data directory if it does not exist
+      file:
+        path: /data/db
+        owner: mongodb
+        group: mongodb
+        state: directory
+        mode: '0755'
+
+    - name: Create MongoDB log file
+      file:
+        path: /var/log/mongodb/mongos.log
+        owner: mongodb
+        group: mongodb
+        state: touch
+        mode: '0755'
+    
+    - name: copy bash script
+      copy:
+        src: ./config-templates/restart.sh
+        dest: /home/vagrant/restart.sh
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Start MongoS
+      shell: mongos --config /etc/mongos.conf
+      ignore_errors: yes
+
+    - name: Initiate Shards
+      shell: |
+        mongosh --eval "sh.addShard('shard1ReplicaSet/shard1:27017')"
+      ignore_errors: yes
+
+    - name: Initiate Sharding
+      shell: |
+        mongo "admin" --quiet --eval "sh.enableSharding('test'); db.runCommand({ shardCollection: 'test.items', key: { shardKey: 'hashed' } })"
+      ignore_errors: yes
+
+   

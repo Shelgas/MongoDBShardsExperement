@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    ansible_distribution_release: "focal"
   tasks:
     - name: Changing mirrors
       replace:
@@ -38,3 +40,15 @@
       service:
         name: atop
         state: restarted
+    
+    - name: Install the gpg key for MongoDB
+      apt_key:
+        url: "https://www.mongodb.org/static/pgp/server-5.0.asc"
+        state: present
+
+    - name: Install the MongoDB repos
+      apt_repository:
+        repo: "deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/5.0 multiverse"
+        state: present
+        update_cache: yes
+

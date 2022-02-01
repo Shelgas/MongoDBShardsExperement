@@ -1,0 +1,162 @@
+version: "0.1"
+defaults:
+  box: ubuntu/focal64
+  box_version: ">= 0"
+  provider:
+    provider: virtualbox
+    memory: 1024
+    cpus: 1
+    gui: false
+    hostname: shard3
+    network:
+      type: private_network
+      ip: 192.168.4.105
+    synced_folder:
+      type: virtualbox
+      from: ../../data
+      to: /vagrant
+      mount_options:
+        dmode: 777
+        fmode: 777
+    customize:
+      - - modifyvm
+        - :id
+        - --cpuexecutioncap
+        - 100
+      - - setextradata
+        - :id
+        - VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant
+        - "1"
+  provision:
+    - type: ansible
+      directory: ../../provision/common
+      file: provision.yml
+    - type: ansible
+      directory: provision
+      file: provision.yml
+stage: 
+  FirstExperementExec:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  FirstExperementExec2:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  FirstExperementExec3:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  FirstExperementExec4:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  FirstExperementExec5:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  SecondExperementExec:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  SecondExperementExec2:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  SecondExperementExec3:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  SecondExperementExec4:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  SecondExperementExec5:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ThirdExperementExec:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ThirdExperementExec2:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ThirdExperementExec3:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ThirdExperementExec4:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ThirdExperementExec5:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec4.1:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec4.2:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec4.3:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec4.4:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec4.5:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec5.1:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec5.2:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec5.3:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec5.4:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
+  ExperementExec5.5:
+    provider:
+      customize:
+      - ["bandwidthctl", :id, "add", "Limit", "--type", "disk", "--limit", "2M"]
+      - ["storageattach", :id, "--storagectl", "SCSI", "--port", "0", "--device", "0", "--type", "hdd", "--bandwidthgroup", "Limit"]
