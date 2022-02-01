@@ -1,3 +1,4 @@
 [submodule "virtstand"]
 	path = virtstand
 	url = https://github.com/rnd-student-lab/virtstand.git
+	ignore = dirty
