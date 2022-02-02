@@ -11,14 +11,14 @@ let url = 'mongodb://192.168.4.102/test';
 function generateEntries(collection, number, valueFieldLength, callback) {
   console.log('Generating entries...');
   let done = _.after(number, callback);
-  let ran = randomstring.generate(valueFieldLength);
+
 
   
   function nextItem(itemNumber) {
+    let ran = randomstring.generate(valueFieldLength);
     collection.insertOne({
       itemNumber: itemNumber,
-      randomValue: ran,
-      shardKey: new ObjectID()
+      shardKey: ran
     }, function() {
       itemNumber++;
       if (itemNumber < number) {

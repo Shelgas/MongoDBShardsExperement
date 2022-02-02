@@ -39,6 +39,6 @@ build/**/*
 yarn.lock
 
 # Ignore Virtstand files
-.virtstand/**/*
+MongoDBStand/.virtstand/**/*
 
-reports/
+MongoDBStand/reports/
