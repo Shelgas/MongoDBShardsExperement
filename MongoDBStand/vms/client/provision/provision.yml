@@ -30,14 +30,14 @@
         group: root
         state: directory
         mode: '0755'
-    - name: s
+    - name: Copy script file
       copy:
         src: ./config-templates/exp.js
         dest: /home/vagrant/script/experement.js
         owner: root
         group: root
         mode: '0644'
-    - name: d
+    - name: Copy package file
       copy:
         src: ./config-templates/package.json
         dest: /home/vagrant/script/package.json
